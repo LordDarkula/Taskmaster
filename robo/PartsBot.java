@@ -84,12 +84,12 @@ public class PartsBot extends AdvancedRobot
     {
         public void init()
         {
-            // initialize radar operation
+            setAdjustRadarForGunTurn(true);
         }
 
         public void move()
         {
-            // implement radar
+            setTurnRadarRight(360);
         }
 
         public boolean shouldTrack( ScannedRobotEvent e )
@@ -110,12 +110,14 @@ public class PartsBot extends AdvancedRobot
     {
         public void init()
         {
-            // initialize gun operation
+            setAdjustGunForRobotTurn(true);
         }
 
         public void move()
         {
-            // gun implemetation
+            //getHeading() - getGunHeading() + enemy.getBearing()
+            setTurnGunRight(enemy.getBearing());
+            fire(1);
         }
     }
 
@@ -123,7 +125,7 @@ public class PartsBot extends AdvancedRobot
     {
         public void init()
         {
-            // initialize tank operation
+            setColors(Color.BLACK, Color.BLACK, Color.BLACK);
         }
 
         public void move()
