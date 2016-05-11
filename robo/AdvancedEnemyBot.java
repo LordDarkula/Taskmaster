@@ -5,7 +5,7 @@ import robocode.*;
 /**
  * Record the advanced state of an enemy bot.
  *
- * @author Aubhro Sengupta, Aditya Kupilli
+ * @author Aubhro Sengupta, Aditya Kuppili
  * @version 5/11/16
  *
  * @author Period - 2

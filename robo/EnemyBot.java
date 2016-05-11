@@ -6,7 +6,7 @@ import robocode.*;
 /**
  * Record the state of an enemy bot.
  *
- * @author Aubhro Sengupta, Aditya Kupilli
+ * @author Aubhro Sengupta, Aditya Kuppili
  * @version 5/10/16
  *
  * @author Period - 2
