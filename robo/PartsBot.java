@@ -50,7 +50,7 @@ public class PartsBot extends AdvancedRobot
         Radar radar = (Radar)parts[RADAR];
         if ( radar.shouldTrack( e ) )
             enemy.update( e, this );
-        // Do not add any more code here 
+        // Do not add any more code here
     }
 
     public void onRobotDeath( RobotDeathEvent e )
@@ -61,6 +61,15 @@ public class PartsBot extends AdvancedRobot
     }
 
     // ... put normalizeBearing and absoluteBearing methods here
+    // normalizes a bearing to between +180 and -180
+    double normalizeBearing(double angle)
+    {
+        while (angle >  180)
+            angle -= 360;
+        while (angle < -180)
+            angle += 360;
+        return angle;
+    }
 
     // ... declare the RobotPart interface and classes that implement it here
     // They will be _inner_ classes.
