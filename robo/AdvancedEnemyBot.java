@@ -17,6 +17,7 @@ public class AdvancedEnemyBot extends EnemyBot
 {
     private double x;
     private double y;
+    private byte scanDirection = 1;
 
     public AdvancedEnemyBot()
     {
@@ -45,6 +46,8 @@ public class AdvancedEnemyBot extends EnemyBot
         x = robot.getX() + Math.sin(Math.toRadians(absBearingDeg)) * e.getDistance();
 
         y = robot.getY() + Math.cos(Math.toRadians(absBearingDeg)) * e.getDistance();
+
+        scanDirection *= -1; // changes value from 1 to -1
     }
 
     public double getFutureX( long when )
@@ -56,6 +59,11 @@ public class AdvancedEnemyBot extends EnemyBot
     {
         // TODO Your code here
         return y + Math.cos(Math.toRadians(getHeading())) * getVelocity() * when;
+    }
+
+    public byte getScanDirection()
+    {
+        return scanDirection;
     }
 
     public void reset()

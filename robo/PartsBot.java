@@ -22,6 +22,7 @@ public class PartsBot extends AdvancedRobot
     private final static int GUN = 1;
     private final static int TANK = 2;
 
+
     public void run()
     {
         parts[RADAR] = new Radar();
@@ -48,7 +49,7 @@ public class PartsBot extends AdvancedRobot
     public void onScannedRobot( ScannedRobotEvent e )
     {
         Radar radar = (Radar)parts[RADAR];
-        if ( radar.shouldTrack( e ) )
+        //if ( radar.shouldTrack( e ) )
             enemy.update( e, this );
         // Do not add any more code here
     }
@@ -62,7 +63,7 @@ public class PartsBot extends AdvancedRobot
 
     // ... put normalizeBearing and absoluteBearing methods here
     // normalizes a bearing to between +180 and -180
-    double normalizeBearing(double angle)
+    private double normalizeBearing(double angle)
     {
         while (angle >  180)
             angle -= 360;
@@ -85,11 +86,14 @@ public class PartsBot extends AdvancedRobot
         public void init()
         {
             setAdjustRadarForGunTurn(true);
+
         }
 
         public void move()
         {
-            setTurnRadarRight(360);
+
+            setTurnRadarRight(360 * enemy.getScanDirection());
+
         }
 
         public boolean shouldTrack( ScannedRobotEvent e )
@@ -115,9 +119,18 @@ public class PartsBot extends AdvancedRobot
 
         public void move()
         {
-            //getHeading() - getGunHeading() + enemy.getBearing()
-            setTurnGunRight(enemy.getBearing());
-            fire(1);
+            //  calculate gun turn toward enemy
+            double turn = getHeading() - getGunHeading() + enemy.getBearing();
+
+            // normalize the turn to take the shortest path there
+            setTurnGunRight(normalizeBearing(turn));
+
+            // if the gun is cool and we're pointed at the target, shoot!
+            if (getGunHeat() == 0 && Math.abs(getGunTurnRemaining()) < 10)
+            {
+                setFire(Math.min(400 / enemy.getDistance(), 3));
+            }
+
         }
     }
 
@@ -130,7 +143,7 @@ public class PartsBot extends AdvancedRobot
 
         public void move()
         {
-            // implement tank movement
+            //setTurnRight(normalizeBearing(enemy.getBearing() + 90));
         }
     }
 }
