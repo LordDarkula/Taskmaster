@@ -28,19 +28,19 @@
       <file leaf-file-name="PartsBot.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/robo/PartsBot.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="79" column="0" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
+            <state relative-caret-position="195">
+              <caret line="14" column="25" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
               <folding>
                 <element signature="method#onRobotDeath#0;class#PartsBot#0" expanded="false" />
                 <element signature="method#normalizeBearing#0;class#PartsBot#0" expanded="false" />
                 <element signature="method#shouldTrack#0;class#Radar#0;class#PartsBot#0" expanded="false" />
-                <element signature="e#2432#2495#0" expanded="false" />
-                <element signature="e#2778#2779#0" expanded="true" />
-                <element signature="e#2846#2847#0" expanded="true" />
-                <element signature="e#2939#2940#0" expanded="true" />
-                <element signature="e#2993#2994#0" expanded="true" />
-                <element signature="e#3626#3627#0" expanded="true" />
-                <element signature="e#3698#3699#0" expanded="true" />
+                <element signature="e#2413#2476#0" expanded="false" />
+                <element signature="e#2759#2760#0" expanded="true" />
+                <element signature="e#2827#2828#0" expanded="true" />
+                <element signature="e#2920#2921#0" expanded="true" />
+                <element signature="e#2974#2975#0" expanded="true" />
+                <element signature="e#3607#3608#0" expanded="true" />
+                <element signature="e#3679#3680#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -62,7 +62,7 @@
       <file leaf-file-name="AdvancedEnemyBot.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/robo/AdvancedEnemyBot.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="735">
+            <state relative-caret-position="870">
               <caret line="61" column="5" selection-start-line="61" selection-start-column="5" selection-end-line="61" selection-end-column="5" />
               <folding>
                 <element signature="e#414#415#0" expanded="true" />
@@ -97,8 +97,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="17" />
-    <option name="y" value="5" />
+    <option name="x" value="23" />
+    <option name="y" value="7" />
     <option name="width" value="1680" />
     <option name="height" value="1046" />
   </component>
@@ -479,7 +479,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="17" y="5" width="1680" height="1046" extended-state="0" />
+    <frame x="23" y="7" width="1680" height="1046" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -552,7 +552,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/robo/AdvancedEnemyBot.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="735">
+        <state relative-caret-position="870">
           <caret line="61" column="5" selection-start-line="61" selection-start-column="5" selection-end-line="61" selection-end-column="5" />
           <folding>
             <element signature="e#414#415#0" expanded="true" />
@@ -571,19 +571,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/robo/PartsBot.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="79" column="0" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
+        <state relative-caret-position="195">
+          <caret line="14" column="25" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
           <folding>
             <element signature="method#onRobotDeath#0;class#PartsBot#0" expanded="false" />
             <element signature="method#normalizeBearing#0;class#PartsBot#0" expanded="false" />
             <element signature="method#shouldTrack#0;class#Radar#0;class#PartsBot#0" expanded="false" />
-            <element signature="e#2432#2495#0" expanded="false" />
-            <element signature="e#2778#2779#0" expanded="true" />
-            <element signature="e#2846#2847#0" expanded="true" />
-            <element signature="e#2939#2940#0" expanded="true" />
-            <element signature="e#2993#2994#0" expanded="true" />
-            <element signature="e#3626#3627#0" expanded="true" />
-            <element signature="e#3698#3699#0" expanded="true" />
+            <element signature="e#2413#2476#0" expanded="false" />
+            <element signature="e#2759#2760#0" expanded="true" />
+            <element signature="e#2827#2828#0" expanded="true" />
+            <element signature="e#2920#2921#0" expanded="true" />
+            <element signature="e#2974#2975#0" expanded="true" />
+            <element signature="e#3607#3608#0" expanded="true" />
+            <element signature="e#3679#3680#0" expanded="true" />
           </folding>
         </state>
       </provider>

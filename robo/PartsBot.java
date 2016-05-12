@@ -6,13 +6,13 @@ import java.awt.Color;
 /**
  * A modular bot adhering to the RoboPart Interface.
  * 
- * @author TODO Your Name
- * @version TODO Date
+ * @author Aubhro Sengupta, Aditya Kuppili
+ * @version 5/11/16
  * 
- * @author Period - TODO Your Period
+ * @author Period - 2
  * @author Assignment - PartsBot
  * 
- * @author Sources - TODO list collaborators
+ * @author Sources - none
  */
 public class PartsBot extends AdvancedRobot
 {
