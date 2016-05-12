@@ -12,7 +12,7 @@ import robocode.*;
  * @author Assignment - AdvancedEnemyBot
  *
  * @author Sources - none
- */
+*/
 public class AdvancedEnemyBot extends EnemyBot
 {
     private double x;
