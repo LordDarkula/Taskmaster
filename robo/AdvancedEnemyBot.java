@@ -12,7 +12,7 @@ import robocode.*;
  * @author Assignment - AdvancedEnemyBot
  *
  * @author Sources - none
-*/
+ */
 public class AdvancedEnemyBot extends EnemyBot
 {
     private double x;
@@ -57,7 +57,7 @@ public class AdvancedEnemyBot extends EnemyBot
 
     public double getFutureY( long when )
     {
-        // TODO Your code here
+
         return y + Math.cos(Math.toRadians(getHeading())) * getVelocity() * when;
     }
 
@@ -68,6 +68,7 @@ public class AdvancedEnemyBot extends EnemyBot
 
     public void reset()
     {
+        super.reset();
         x = 0.0;
         y = 0.0;
     }

@@ -5,14 +5,14 @@ import java.awt.Color;
 
 /**
  * A modular bot adhering to the RoboPart Interface.
- * 
- * @author TODO Your Name
- * @version TODO Date
- * 
- * @author Period - TODO Your Period
+ *
+ * @author Aubhro Sengupta
+ * @version 5/17/16
+ *
+ * @author Period - 2
  * @author Assignment - PartsBot
- * 
- * @author Sources - TODO list collaborators
+ *
+ * @author Sources - none
  */
 public class PartsBot extends AdvancedRobot
 {
@@ -21,7 +21,6 @@ public class PartsBot extends AdvancedRobot
     private final static int RADAR = 0;
     private final static int GUN = 1;
     private final static int TANK = 2;
-
 
     public void run()
     {
@@ -49,9 +48,8 @@ public class PartsBot extends AdvancedRobot
     public void onScannedRobot( ScannedRobotEvent e )
     {
         Radar radar = (Radar)parts[RADAR];
-        //if ( radar.shouldTrack( e ) )
+        if ( radar.shouldTrack( e ) )
             enemy.update( e, this );
-        // Do not add any more code here
     }
 
     public void onRobotDeath( RobotDeathEvent e )
@@ -62,15 +60,6 @@ public class PartsBot extends AdvancedRobot
     }
 
     // ... put normalizeBearing and absoluteBearing methods here
-    // normalizes a bearing to between +180 and -180
-    private double normalizeBearing(double angle)
-    {
-        while (angle >  180)
-            angle -= 360;
-        while (angle < -180)
-            angle += 360;
-        return angle;
-    }
 
     // ... declare the RobotPart interface and classes that implement it here
     // They will be _inner_ classes.
@@ -85,15 +74,12 @@ public class PartsBot extends AdvancedRobot
     {
         public void init()
         {
-            setAdjustRadarForGunTurn(true);
-
+            // initialize radar operation
         }
 
         public void move()
         {
-
-            setTurnRadarRight(360 * enemy.getScanDirection());
-
+            // implement radar
         }
 
         public boolean shouldTrack( ScannedRobotEvent e )
@@ -101,7 +87,7 @@ public class PartsBot extends AdvancedRobot
             // track if we have no enemy, the one we found is significantly
             // closer, or we scanned the one we've been tracking.
             return ( enemy.none() || e.getDistance() < enemy.getDistance() - 70 || e.getName()
-                .equals( enemy.getName() ) );
+                    .equals( enemy.getName() ) );
         }
 
         public boolean wasTracking( RobotDeathEvent e )
@@ -114,23 +100,12 @@ public class PartsBot extends AdvancedRobot
     {
         public void init()
         {
-            setAdjustGunForRobotTurn(true);
+            // initialize gun operation
         }
 
         public void move()
         {
-            //  calculate gun turn toward enemy
-            double turn = getHeading() - getGunHeading() + enemy.getBearing();
-
-            // normalize the turn to take the shortest path there
-            setTurnGunRight(normalizeBearing(turn));
-
-            // if the gun is cool and we're pointed at the target, shoot!
-            if (getGunHeat() == 0 && Math.abs(getGunTurnRemaining()) < 10)
-            {
-                setFire(Math.min(400 / enemy.getDistance(), 3));
-            }
-
+            // gun implemetation
         }
     }
 
@@ -138,12 +113,12 @@ public class PartsBot extends AdvancedRobot
     {
         public void init()
         {
-            setColors(Color.BLACK, Color.BLACK, Color.BLACK);
+            // initialize tank operation
         }
 
         public void move()
         {
-            //setTurnRight(normalizeBearing(enemy.getBearing() + 90));
+            // implement tank movement
         }
     }
 }
