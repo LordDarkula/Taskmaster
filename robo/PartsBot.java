@@ -136,21 +136,16 @@ public class PartsBot extends AdvancedRobot
 
         public void move()
         {
-
-            double futureX = enemy.getFutureX(1);
-            double futureY = enemy.getFutureY(1);
+            long time = 20;
+            double futureX = enemy.getFutureX(time);
+            double futureY = enemy.getFutureY(time);
             double futureDistance = lawOfCos(enemy.getDistance(), pythagoreanDistance(getX(), getY(), futureX, futureY), enemy.getHeading() + 90);
+            futureDistance = pythagoreanDistance(getX(), getY(), futureX, futureY);
 
-            double firePower = Math.min(400 / futureDistance, 3);
-            // calculate speed of bullet
-            double bulletSpeed = 20 - firePower * 3;
 
             // distance = rate * time, solved for time
 
-            long time = (long)(futureDistance / bulletSpeed);
 
-            futureX = enemy.getFutureX(time);
-            futureY = enemy.getFutureY(time);
 
             double absDeg = absoluteBearing(getX(), getY(), futureX, futureY);
             //  calculate gun turn toward enemy
@@ -158,11 +153,24 @@ public class PartsBot extends AdvancedRobot
 
             // normalize the turn to take the shortest path there
             setTurnGunRight(normalizeBearing(absDeg - getGunHeading()));
+            double enemyDistanceLeft = pythagoreanDistance(enemy.getX(), enemy.getY(), futureX, futureY);
+            time = (long)(enemyDistanceLeft / enemy.getVelocity());
+            double bulletSpeed = Math.max(11D, Math.min(19.7, futureDistance / time));
+
+            double firePower;
+            if (enemy.getDistance() > 20) {
+                firePower = (20 - bulletSpeed) / 3;
+            } else {
+                firePower = 3;
+            }
+            // calculate speed of bullet
+
 
             // if the gun is cool and we're pointed at the target, shoot!
             if (getGunHeat() == 0 && Math.abs(getGunTurnRemaining()) < 10)
             {
                 setFire(firePower);
+
             }
 
         }

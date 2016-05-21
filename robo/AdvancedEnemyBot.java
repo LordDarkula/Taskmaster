@@ -57,7 +57,6 @@ public class AdvancedEnemyBot extends EnemyBot
 
     public double getFutureY( long when )
     {
-
         return y + Math.cos(Math.toRadians(getHeading())) * getVelocity() * when;
     }
 
