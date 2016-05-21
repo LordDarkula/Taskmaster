@@ -72,6 +72,12 @@ public class PartsBot extends AdvancedRobot
         return angle;
     }
 
+    // computes the absolute bearing between two points
+    private double absoluteBearing(double x1, double y1, double x2, double y2)
+    {
+        return Math.toDegrees(Math.atan2(x2-x1, y2-y1));
+    }
+
     // ... declare the RobotPart interface and classes that implement it here
     // They will be _inner_ classes.
     public interface RobotPart
@@ -119,16 +125,27 @@ public class PartsBot extends AdvancedRobot
 
         public void move()
         {
+            double firePower = Math.min(400 / enemy.getDistance(), 3);
+            // calculate speed of bullet
+            double bulletSpeed = 20 - firePower * 3;
+
+            // distance = rate * time, solved for time
+            long time = (long)(enemy.getDistance() / bulletSpeed);
+
+            double futureX = enemy.getFutureX(time);
+            double futureY = enemy.getFutureY(time);
+
+            double absDeg = absoluteBearing(getX(), getY(), futureX, futureY);
             //  calculate gun turn toward enemy
-            double turn = getHeading() - getGunHeading() + enemy.getBearing();
+
 
             // normalize the turn to take the shortest path there
-            setTurnGunRight(normalizeBearing(turn));
+            setTurnGunRight(normalizeBearing(absDeg - getGunHeading()));
 
             // if the gun is cool and we're pointed at the target, shoot!
             if (getGunHeat() == 0 && Math.abs(getGunTurnRemaining()) < 10)
             {
-                setFire(Math.min(400 / enemy.getDistance(), 3));
+                setFire(firePower);
             }
 
         }
