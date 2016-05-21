@@ -5,13 +5,13 @@ import java.awt.Color;
 
 /**
  * A modular bot adhering to the RoboPart Interface.
- * 
+ *
  * @author Aubhro Sengupta, Aditya Kuppili
  * @version 5/11/16
- * 
+ *
  * @author Period - 2
  * @author Assignment - PartsBot
- * 
+ *
  * @author Sources - none
  */
 public class PartsBot extends AdvancedRobot
@@ -50,7 +50,7 @@ public class PartsBot extends AdvancedRobot
     {
         Radar radar = (Radar)parts[RADAR];
         //if ( radar.shouldTrack( e ) )
-            enemy.update( e, this );
+        enemy.update( e, this );
         // Do not add any more code here
     }
 
@@ -101,7 +101,7 @@ public class PartsBot extends AdvancedRobot
             // track if we have no enemy, the one we found is significantly
             // closer, or we scanned the one we've been tracking.
             return ( enemy.none() || e.getDistance() < enemy.getDistance() - 70 || e.getName()
-                .equals( enemy.getName() ) );
+                    .equals( enemy.getName() ) );
         }
 
         public boolean wasTracking( RobotDeathEvent e )
@@ -143,7 +143,8 @@ public class PartsBot extends AdvancedRobot
 
         public void move()
         {
-            //setTurnRight(normalizeBearing(enemy.getBearing() + 90));
+            setTurnRight(enemy.getBearing());
+            setAhead(enemy.getDistance());
         }
     }
 }
