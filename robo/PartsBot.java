@@ -143,7 +143,8 @@ public class PartsBot extends AdvancedRobot
 
         public void move()
         {
-            //setTurnRight(normalizeBearing(enemy.getBearing() + 90));
+            setTurnRight(enemy.getBearing());
+            setAhead(enemy.getDistance());
         }
     }
 }
