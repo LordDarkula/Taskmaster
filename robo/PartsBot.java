@@ -49,7 +49,7 @@ public class PartsBot extends AdvancedRobot
     public void onScannedRobot( ScannedRobotEvent e )
     {
         Radar radar = (Radar)parts[RADAR];
-        //if ( radar.shouldTrack( e ) )
+        if ( radar.shouldTrack( e ) )
         enemy.update( e, this );
         // Do not add any more code here
     }
@@ -141,7 +141,7 @@ public class PartsBot extends AdvancedRobot
             double futureY = enemy.getFutureY(1);
             double futureDistance = lawOfCos(enemy.getDistance(), pythagoreanDistance(getX(), getY(), futureX, futureY), enemy.getHeading() + 90);
 
-            double firePower = Math.min(400 / enemy.getDistance(), 3);
+            double firePower = Math.min(400 / futureDistance, 3);
             // calculate speed of bullet
             double bulletSpeed = 20 - firePower * 3;
 
