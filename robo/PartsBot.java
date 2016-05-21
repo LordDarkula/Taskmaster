@@ -78,6 +78,7 @@ public class PartsBot extends AdvancedRobot
         return Math.toDegrees(Math.atan2(x2-x1, y2-y1));
     }
 
+
     public double lawOfCos( double b, double c, double angle)
     {
         return Math.sqrt(Math.pow(b, 2) + Math.pow(c, 2) - 2*b*c*Math.cos(Math.toRadians(angle)));
@@ -135,14 +136,17 @@ public class PartsBot extends AdvancedRobot
 
         public void move()
         {
+
             double futureX = enemy.getFutureX(1);
             double futureY = enemy.getFutureY(1);
             double futureDistance = lawOfCos(enemy.getDistance(), pythagoreanDistance(getX(), getY(), futureX, futureY), enemy.getHeading() + 90);
+
             double firePower = Math.min(400 / enemy.getDistance(), 3);
             // calculate speed of bullet
             double bulletSpeed = 20 - firePower * 3;
 
             // distance = rate * time, solved for time
+
             long time = (long)(futureDistance / bulletSpeed);
 
             futureX = enemy.getFutureX(time);
