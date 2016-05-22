@@ -1,6 +1,7 @@
 package robo;
 
 import robocode.*;
+import RobotContstants.*;
 import java.awt.Color;
 
 /**
