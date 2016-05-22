@@ -1,7 +1,6 @@
 package robo;
 
 import robocode.*;
-import RobotContstants.*;
 import java.awt.Color;
 
 /**
@@ -19,6 +18,7 @@ public class PartsBot extends AdvancedRobot
 {
     private AdvancedEnemyBot enemy = new AdvancedEnemyBot();
     private RobotPart[] parts = new RobotPart[3]; // make three parts
+    private RobotConstants robotConstants = new RobotConstants();
     private final static int RADAR = 0;
     private final static int GUN = 1;
     private final static int TANK = 2;
@@ -137,7 +137,7 @@ public class PartsBot extends AdvancedRobot
 
         public void move()
         {
-            long time = 10;
+            long time = robotConstants.INITIAL_TIME;
             double futureX = enemy.getFutureX(time);
             double futureY = enemy.getFutureY(time);
             //double futureDistance = lawOfCos(enemy.getDistance(), pythagoreanDistance(getX(), getY(), futureX, futureY), enemy.getHeading() + 90);
@@ -157,24 +157,24 @@ public class PartsBot extends AdvancedRobot
             double enemyDistanceLeft = pythagoreanDistance(enemy.getX(), enemy.getY(), futureX, futureY);
             double bulletSpeed;
 
-            if (enemy.getVelocity() != 0 ) {
+            if (enemy.getVelocity() != robotConstants.ENEMY_REST_VELOCITY ) {
                 time = (long) (enemyDistanceLeft / enemy.getVelocity());
-                bulletSpeed = Math.max(11D, Math.min(19D, (futureDistance / time)));
+                bulletSpeed = Math.max(robotConstants.MIN_BULLET_VELOCITY, Math.min(robotConstants.MAX_BULLET_VELOCITY, (futureDistance / time)));
             } else {
-                bulletSpeed = 11D;
+                bulletSpeed = robotConstants.MIN_BULLET_VELOCITY;
             }
 
             double firePower;
-            if (enemy.getDistance() > 2) {
+            if (enemy.getDistance() > robotConstants.RAM_DISTANCE) {
                 firePower = (20 - bulletSpeed) / 3;
             } else {
-                firePower = 3;
+                firePower = robotConstants.MAX_FIREPOWER;
             }
             // calculate speed of bullet
 
 
             // if the gun is cool and we're pointed at the target, shoot!
-            if (getGunHeat() == 0 && Math.abs(getGunTurnRemaining()) < 10)
+            if (getGunHeat() == 0 && Math.abs(getGunTurnRemaining()) < robotConstants.MAX_TURN_REMAINING)
             {
                 setFire(firePower);
 

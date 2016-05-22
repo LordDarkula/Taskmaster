@@ -1,10 +1,23 @@
 package robo;
 
-/**
- * Created by aubhrosengupta on 5/21/16.
- */
+
 public class RobotConstants {
-    public RobotConstants (){
+
+    public final int RAM_DISTANCE = 2;
+
+    public final int ENEMY_REST_VELOCITY = 0;
+
+    public final int MAX_FIREPOWER = 3;
+
+    public final int MAX_TURN_REMAINING = 10;
+
+    public final long INITIAL_TIME = 10;
+
+    public final double MAX_BULLET_VELOCITY = 19D;
+
+    public final double MIN_BULLET_VELOCITY = 11D;
+
+    public RobotConstants() {
 
     }
 }
