@@ -164,7 +164,7 @@ public class PartsBot extends AdvancedRobot
             }
 
             double firePower;
-            if (enemy.getDistance() > 5) {
+            if (enemy.getDistance() > 2) {
                 firePower = (20 - bulletSpeed) / 3;
             } else {
                 firePower = 3;
