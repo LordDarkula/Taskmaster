@@ -137,40 +137,54 @@ public class PartsBot extends AdvancedRobot
 
         public void move()
         {
+            // Sets time at which the bullet will hit the enemy
             long time = robotConstants.INITIAL_TIME;
+
+            // Gets where enemy will be at that time
             double futureX = enemy.getFutureX(time);
             double futureY = enemy.getFutureY(time);
-            //double futureDistance = lawOfCos(enemy.getDistance(), pythagoreanDistance(getX(), getY(), futureX, futureY), enemy.getHeading() + 90);
-            double futureDistance = pythagoreanDistance(getX(), getY(), futureX, futureY);
 
 
-            // distance = rate * time, solved for time
-
-
-
-            double absDeg = absoluteBearing(getX(), getY(), futureX, futureY);
             //  calculate gun turn toward enemy
+            double absDeg = absoluteBearing(getX(), getY(), futureX, futureY);
 
+
+            // Finds distance to that point
+            double futureDistance = pythagoreanDistance(getX(), getY(), futureX, futureY);
 
             // normalize the turn to take the shortest path there
             setTurnGunRight(normalizeBearing(absDeg - getGunHeading()));
+
+            // Calculate enemy distance left after gun has turned
             double enemyDistanceLeft = pythagoreanDistance(enemy.getX(), enemy.getY(), futureX, futureY);
             double bulletSpeed;
 
+            // If the enemy is not at rest
             if (enemy.getVelocity() != robotConstants.ENEMY_REST_VELOCITY ) {
+
+                // Calculate the time it will take for the enemy to reach the destination
                 time = (long) (enemyDistanceLeft / enemy.getVelocity());
+
+                // Sets bullet speed at a velocity that will ensure that it will hit the enemy at the destination
                 bulletSpeed = Math.max(robotConstants.MIN_BULLET_VELOCITY, Math.min(robotConstants.MAX_BULLET_VELOCITY, (futureDistance / time)));
             } else {
+
+                // If the enemy is at bullet speed can be the minimum
                 bulletSpeed = robotConstants.MIN_BULLET_VELOCITY;
             }
 
             double firePower;
+
+            // If robot is not being rammed
             if (enemy.getDistance() > robotConstants.RAM_DISTANCE) {
+
+                // Calculate firepower necessary for the bullet to have the needed velocity
                 firePower = (20 - bulletSpeed) / 3;
             } else {
+
+                // If robot is being rammed fire with highest available firepower
                 firePower = robotConstants.MAX_FIREPOWER;
             }
-            // calculate speed of bullet
 
 
             // if the gun is cool and we're pointed at the target, shoot!
