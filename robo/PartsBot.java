@@ -136,11 +136,11 @@ public class PartsBot extends AdvancedRobot
 
         public void move()
         {
-            long time = 20;
+            long time = 10;
             double futureX = enemy.getFutureX(time);
             double futureY = enemy.getFutureY(time);
-            double futureDistance = lawOfCos(enemy.getDistance(), pythagoreanDistance(getX(), getY(), futureX, futureY), enemy.getHeading() + 90);
-            futureDistance = pythagoreanDistance(getX(), getY(), futureX, futureY);
+            //double futureDistance = lawOfCos(enemy.getDistance(), pythagoreanDistance(getX(), getY(), futureX, futureY), enemy.getHeading() + 90);
+            double futureDistance = pythagoreanDistance(getX(), getY(), futureX, futureY);
 
 
             // distance = rate * time, solved for time
@@ -154,11 +154,17 @@ public class PartsBot extends AdvancedRobot
             // normalize the turn to take the shortest path there
             setTurnGunRight(normalizeBearing(absDeg - getGunHeading()));
             double enemyDistanceLeft = pythagoreanDistance(enemy.getX(), enemy.getY(), futureX, futureY);
-            time = (long)(enemyDistanceLeft / enemy.getVelocity());
-            double bulletSpeed = Math.max(11D, Math.min(19.7, futureDistance / time));
+            double bulletSpeed;
+
+            if (enemy.getVelocity() != 0 ) {
+                time = (long) (enemyDistanceLeft / enemy.getVelocity());
+                bulletSpeed = Math.max(11D, Math.min(19D, (futureDistance / time)));
+            } else {
+                bulletSpeed = 11D;
+            }
 
             double firePower;
-            if (enemy.getDistance() > 20) {
+            if (enemy.getDistance() > 5) {
                 firePower = (20 - bulletSpeed) / 3;
             } else {
                 firePower = 3;
