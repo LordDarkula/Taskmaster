@@ -11,9 +11,9 @@ public class RobotConstants {
 
     public final int MAX_TURN_REMAINING = 10;
 
-    public final long INITIAL_TIME = 10;
+    public final long INITIAL_TIME = 18;
 
-    public final double MAX_BULLET_VELOCITY = 19D;
+    public final double MAX_BULLET_VELOCITY = 18D;
 
     public final double MIN_BULLET_VELOCITY = 11D;
 

@@ -10,11 +10,11 @@ import java.awt.Color;
  * @version 5/11/16
  *
  * @author Period - 2
- * @author Assignment - PartsBot
+ * @author Assignment - Taskmaster
  *
  * @author Sources - none
  */
-public class PartsBot extends AdvancedRobot
+public class Taskmaster extends AdvancedRobot
 {
     private AdvancedEnemyBot enemy = new AdvancedEnemyBot();
     private RobotPart[] parts = new RobotPart[3]; // make three parts
@@ -201,7 +201,7 @@ public class PartsBot extends AdvancedRobot
     {
         public void init()
         {
-            setColors(Color.BLACK, Color.BLACK, Color.BLACK);
+            setColors(Color.WHITE, Color.WHITE, Color.BLACK);
         }
 
         public void move()
