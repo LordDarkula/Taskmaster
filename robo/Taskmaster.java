@@ -160,7 +160,7 @@ public class Taskmaster extends AdvancedRobot
             double bulletSpeed;
 
             // If the enemy is not at rest
-            if (enemy.getVelocity() != robotConstants.ENEMY_REST_VELOCITY ) {
+            if (enemy.getVelocity() > robotConstants.ENEMY_REST_VELOCITY ) {
 
                 // Calculate the time it will take for the enemy to reach the destination
                 time = (long) (enemyDistanceLeft / enemy.getVelocity());
