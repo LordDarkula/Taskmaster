@@ -3,7 +3,7 @@ package robo;
 
 public class RobotConstants {
 
-    public final int RAM_DISTANCE = 2;
+    public final int RAM_DISTANCE = 30;
 
     public final int ENEMY_REST_VELOCITY = 0;
 
@@ -11,11 +11,11 @@ public class RobotConstants {
 
     public final int MAX_TURN_REMAINING = 10;
 
-    public final long INITIAL_TIME = 18;
+    public final long INITIAL_TIME = 6;
 
-    public final double MAX_BULLET_VELOCITY = 18D;
+    public final double MAX_BULLET_VELOCITY = 19.7D;
 
-    public final double MIN_BULLET_VELOCITY = 11D;
+    public final double MIN_BULLET_VELOCITY = 14D;
 
     public RobotConstants() {
 
