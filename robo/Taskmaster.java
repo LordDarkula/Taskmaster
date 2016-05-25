@@ -22,6 +22,7 @@ public class Taskmaster extends AdvancedRobot
     private final static int RADAR = 0;
     private final static int GUN = 1;
     private final static int TANK = 2;
+    private static byte moveDir;
 
 
     public void run()
@@ -202,6 +203,7 @@ public class Taskmaster extends AdvancedRobot
         public void init()
         {
             setColors(Color.WHITE, Color.WHITE, Color.BLACK);
+            moveDir = 1;
         }
 
         public void move()
@@ -215,6 +217,12 @@ public class Taskmaster extends AdvancedRobot
                 //setTurnRight(enemy.getBearing());
                 //setAhead(enemy.getDistance());
             //}
+
+            if( enemy.lostEnergy())
+            {
+                moveDir *= -1;
+                setAhead(200 * moveDir);
+            }
         }
     }
 }

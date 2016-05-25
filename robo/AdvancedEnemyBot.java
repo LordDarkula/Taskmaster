@@ -18,6 +18,7 @@ public class AdvancedEnemyBot extends EnemyBot
     private double x;
     private double y;
     private byte scanDirection = 1;
+    private double energy;
 
     public AdvancedEnemyBot()
     {
@@ -47,6 +48,8 @@ public class AdvancedEnemyBot extends EnemyBot
 
         y = robot.getY() + Math.cos(Math.toRadians(absBearingDeg)) * e.getDistance();
 
+
+
         scanDirection *= -1; // changes value from 1 to -1
     }
 
@@ -63,6 +66,17 @@ public class AdvancedEnemyBot extends EnemyBot
     public byte getScanDirection()
     {
         return scanDirection;
+    }
+
+    public boolean lostEnergy()
+    {
+
+        if (getEnergy() < energy) {
+            energy = getEnergy();
+            return true;
+        }
+        energy = getEnergy();
+        return false;
     }
 
     public void reset()
