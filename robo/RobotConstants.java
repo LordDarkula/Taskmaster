@@ -15,7 +15,7 @@ public class RobotConstants {
 
     public final long INITIAL_TIME = 7;
 
-    public final double MAX_BULLET_VELOCITY = 18D;
+    public final double MAX_BULLET_VELOCITY = 15D;
 
     public final double MIN_BULLET_VELOCITY = 11D;
 
