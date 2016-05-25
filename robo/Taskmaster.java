@@ -192,9 +192,9 @@ public class Taskmaster extends AdvancedRobot
             // if the gun is cool and we're pointed at the target, shoot!
             //if (getGunHeat() == 0 && Math.abs(getGunTurnRemaining()) < robotConstants.MAX_TURN_REMAINING)
             //{
-            //if (enemy.lostEnergy()) {
+            if (enemy.lostEnergy()) {
                 setFire(firePower);
-            //}
+            }
 
             //}
 
@@ -212,22 +212,24 @@ public class Taskmaster extends AdvancedRobot
 
         public void move()
         {
-            //if (enemy.getDistance() < robotConstants.RAM_DISTANCE)
-            //{
-                setTurnRight(enemy.getBearing() + 90 + moveAngle);
-                setAhead(200 * moveDir);
-            //}
-            //else {
-                //setTurnRight(enemy.getBearing());
-                //setAhead(enemy.getDistance());
-            //}
-
-            if( enemy.lostEnergy())
+            if (enemy.getDistance() > 200)
             {
-                moveDir *= -1;
-                moveAngle *= -1;
-                //setAhead(300 * moveDir);
+                if( enemy.lostEnergy() )
+                {
+                    setColors(Color.black, Color.black, Color.black);
+                    moveDir *= -robotConstants.getRandomDistance();
+                    moveAngle *= -1;
+                    //setAhead(300 * moveDir);
+                }
+                setTurnRight(enemy.getBearing() + 90 + moveAngle);
+                setAhead(robotConstants.getRandomDistance() * moveDir);
             }
+            else {
+                setTurnRight(enemy.getBearing());
+                setAhead(enemy.getDistance());
+            }
+
+
         }
     }
 }

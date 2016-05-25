@@ -84,6 +84,7 @@ public class AdvancedEnemyBot extends EnemyBot
         super.reset();
         x = 0.0;
         y = 0.0;
+        energy = 100;
     }
 
 }

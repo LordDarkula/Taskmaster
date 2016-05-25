@@ -13,7 +13,7 @@ public class RobotConstants {
 
     public final int MAX_TURN_REMAINING = 10;
 
-    public final long INITIAL_TIME = 10;
+    public final long INITIAL_TIME = 7;
 
     public final double MAX_BULLET_VELOCITY = 19.7D;
 
@@ -27,7 +27,7 @@ public class RobotConstants {
 
     public int getRandomDistance()
     {
-        return rand.nextInt(75) + 75;
+        return rand.nextInt(100) + 75;
     }
 
 }
