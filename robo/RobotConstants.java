@@ -1,6 +1,8 @@
 package robo;
 
 
+import java.util.Random;
+
 public class RobotConstants {
 
     public final int RAM_DISTANCE = 30;
@@ -11,13 +13,21 @@ public class RobotConstants {
 
     public final int MAX_TURN_REMAINING = 10;
 
-    public final long INITIAL_TIME = 6;
+    public final long INITIAL_TIME = 10;
 
     public final double MAX_BULLET_VELOCITY = 19.7D;
 
     public final double MIN_BULLET_VELOCITY = 14D;
 
+    public Random rand = new Random();
+
     public RobotConstants() {
 
     }
+
+    public int getRandomDistance()
+    {
+        return rand.nextInt(75) + 75;
+    }
+
 }
