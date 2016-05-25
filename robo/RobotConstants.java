@@ -1,9 +1,11 @@
 package robo;
 
 
+import java.util.Random;
+
 public class RobotConstants {
 
-    public final int RAM_DISTANCE = 2;
+    public final int RAM_DISTANCE = 20;
 
     public final int ENEMY_REST_VELOCITY = 0;
 
@@ -19,5 +21,11 @@ public class RobotConstants {
 
     public RobotConstants() {
 
+    }
+
+    public int getRandomAngle()
+    {
+        Random rand = new Random();
+        return rand.nextInt(20) + 20;
     }
 }

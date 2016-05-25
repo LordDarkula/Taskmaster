@@ -137,18 +137,41 @@ public class Taskmaster extends AdvancedRobot
 
         public void move()
         {
-
+            if (enemy.getDistance() <= robotConstants.RAM_DISTANCE)
+            {
+                ramPredict();
+            }
+            else
+            {
+                linearPredict();
+            }
 
         }
 
         private void ramPredict()
         {
+            // calculate firepower based on distance
+            double firePower = Math.min(500 / enemy.getDistance(), 3);
 
+            // calculate speed of bullet
+            double bulletSpeed = 20 - firePower * 3;
+
+            // distance = rate * time, solved for time
+            long time = (long)(enemy.getDistance() / bulletSpeed);
+
+            // calculate gun turn to predicted x,y location
+            double futureX = enemy.getFutureX(time);
+            double futureY = enemy.getFutureY(time);
+            double absDeg = absoluteBearing(getX(), getY(), futureX, futureY);
+
+            // turn the gun to the predicted x,y location
+            setTurnGunRight(normalizeBearing(absDeg - getGunHeading()));
+            setFire(firePower);
         }
 
         private void linearPredict()
         {
-            // Sets time at which the bullet will hit the enemy
+
             long time = robotConstants.INITIAL_TIME;
 
             // Gets where enemy will be at that time
