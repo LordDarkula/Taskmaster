@@ -59,8 +59,17 @@ public class Taskmaster extends AdvancedRobot
     public void onRobotDeath( RobotDeathEvent e )
     {
         Radar radar = (Radar)parts[RADAR];
+        linear = !linear;
         if ( radar.wasTracking( e ) )
+            linear = !linear;
             enemy.reset();
+    }
+
+    public void onBulletMissed(BulletMissedEvent e)
+    {
+        linear = !linear;
+        setColors(Color.black, Color.black, Color.black);
+
     }
 
     // ... put normalizeBearing and absoluteBearing methods here
@@ -138,21 +147,18 @@ public class Taskmaster extends AdvancedRobot
 
         public void move()
         {
-            if (enemy.getDistance() <= robotConstants.RAM_DISTANCE)
-            {
-                ramPredict();
-            }
-            else
+            if (linear)
             {
                 linearPredict();
             }
+            else
+            {
+                ramPredict();
+            }
 
         }
 
-        public void OnBulletMissed(BulletMissedEvent evnt)
-        {
-            linear = !linear;
-        }
+
 
         private void ramPredict()
         {
