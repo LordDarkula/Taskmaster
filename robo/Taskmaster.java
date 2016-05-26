@@ -149,42 +149,28 @@ public class Taskmaster extends AdvancedRobot
         {
             if (linear)
             {
-                linearPredict();
+                parts[GUN] = new LinearPredict();
+
             }
             else
             {
-                ramPredict();
+                parts[GUN] = new RamPredict();
             }
 
         }
+    }
 
-
-
-        private void ramPredict()
+    private class LinearPredict implements RobotPart
+    {
+        private long time;
+        public void init()
         {
-            // calculate firepower based on distance
-            double firePower = Math.min(500 / enemy.getDistance(), 3);
+            time = robotConstants.INITIAL_TIME;
 
-            // calculate speed of bullet
-            double bulletSpeed = 20 - firePower * 3;
-
-            // distance = rate * time, solved for time
-            long time = (long)(enemy.getDistance() / bulletSpeed);
-
-            // calculate gun turn to predicted x,y location
-            double futureX = enemy.getFutureX(time);
-            double futureY = enemy.getFutureY(time);
-            double absDeg = absoluteBearing(getX(), getY(), futureX, futureY);
-
-            // turn the gun to the predicted x,y location
-            setTurnGunRight(normalizeBearing(absDeg - getGunHeading()));
-            setFire(firePower);
         }
-
-        private void linearPredict()
+        public void move()
         {
 
-            long time = robotConstants.INITIAL_TIME;
 
             // Gets where enemy will be at that time
             double futureX = enemy.getFutureX(time);
@@ -206,25 +192,54 @@ public class Taskmaster extends AdvancedRobot
             double bulletSpeed;
 
 
-                // Calculate the time it will take for the enemy to reach the destination
-                time = (long) (enemyDistanceLeft / enemy.getVelocity());
+            // Calculate the time it will take for the enemy to reach the destination
+            time = (long) (enemyDistanceLeft / enemy.getVelocity());
 
-                // Sets bullet speed at a velocity that will ensure that it will hit the enemy at the destination
-                bulletSpeed = Math.max(robotConstants.MIN_BULLET_VELOCITY, Math.min(robotConstants.MAX_BULLET_VELOCITY, (futureDistance / time)));
+            // Sets bullet speed at a velocity that will ensure that it will hit the enemy at the destination
+            bulletSpeed = Math.max(robotConstants.MIN_BULLET_VELOCITY, Math.min(robotConstants.MAX_BULLET_VELOCITY, (futureDistance / time)));
 
             double firePower;
 
 
-                // Calculate firepower necessary for the bullet to have the needed velocity
-                firePower = (20 - bulletSpeed) / 3;
+            // Calculate firepower necessary for the bullet to have the needed velocity
+            firePower = (20 - bulletSpeed) / 3;
 
 
             // if the gun is cool and we're pointed at the target, shoot!
-            if (getGunHeat() == 0 && Math.abs(getGunTurnRemaining()) < robotConstants.MAX_TURN_REMAINING)
-            {
+            //if (getGunHeat() == 0 && Math.abs(getGunTurnRemaining()) < robotConstants.MAX_TURN_REMAINING)
+            //{
                 setFire(firePower);
 
-            }
+            //}
+        }
+    }
+
+    private class RamPredict implements RobotPart
+    {
+        public void init()
+        {
+
+        }
+
+        public void move()
+        {
+            // calculate firepower based on distance
+            double firePower = Math.min(500 / enemy.getDistance(), 3);
+
+            // calculate speed of bullet
+            double bulletSpeed = 20 - firePower * 3;
+
+            // distance = rate * time, solved for time
+            long time = (long)(enemy.getDistance() / bulletSpeed);
+
+            // calculate gun turn to predicted x,y location
+            double futureX = enemy.getFutureX(time);
+            double futureY = enemy.getFutureY(time);
+            double absDeg = absoluteBearing(getX(), getY(), futureX, futureY);
+
+            // turn the gun to the predicted x,y location
+            setTurnGunRight(normalizeBearing(absDeg - getGunHeading()));
+            setFire(firePower);
         }
     }
 
