@@ -27,7 +27,12 @@ public class RobotConstants {
 
     public int getRandomDistance()
     {
-        return rand.nextInt(100) + 75;
+        return rand.nextInt(200) + 100;
+    }
+
+    public int getRandomAngle()
+    {
+        return rand.nextInt(100) - 50;
     }
 
 }

@@ -57,6 +57,8 @@ public class Taskmaster extends AdvancedRobot
         // Do not add any more code here
     }
 
+    public void onHitWall(HitWallEvent e) { moveDir *= -1; }
+
     public void onRobotDeath( RobotDeathEvent e )
     {
         Radar radar = (Radar)parts[RADAR];
@@ -207,22 +209,24 @@ public class Taskmaster extends AdvancedRobot
         {
             setColors(Color.WHITE, Color.WHITE, Color.BLACK);
             moveDir = 1;
-            moveAngle = -20;
+            moveAngle = 20;
         }
 
         public void move()
         {
             if (enemy.getDistance() > 200)
             {
-                if( enemy.lostEnergy() )
+
+
+                // strafe by changing direction every 20 ticks
+                if (getTime() % 30 == 0)
                 {
-                    setColors(Color.black, Color.black, Color.black);
-                    moveDir *= -robotConstants.getRandomDistance();
+                    setTurnRight(enemy.getBearing() + 90 + moveAngle + robotConstants.getRandomAngle());
+                    setColors(Color.black, Color.BLACK, Color.black);
+                    moveDir *= -1;
                     moveAngle *= -1;
-                    //setAhead(300 * moveDir);
+                    setAhead(robotConstants.getRandomDistance() * moveDir);
                 }
-                setTurnRight(enemy.getBearing() + 90 + moveAngle);
-                setAhead(robotConstants.getRandomDistance() * moveDir);
             }
             else {
                 setTurnRight(enemy.getBearing());
