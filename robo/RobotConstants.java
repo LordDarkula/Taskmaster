@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class RobotConstants {
 
-    public final int RAM_DISTANCE = 20;
+    public final int RAM_DISTANCE = 2;
 
     public final int ENEMY_REST_VELOCITY = 0;
 
@@ -13,7 +13,7 @@ public class RobotConstants {
 
     public final int MAX_TURN_REMAINING = 10;
 
-    public final long INITIAL_TIME = 7;
+    public final long INITIAL_TIME = 6;
 
     public final double MAX_BULLET_VELOCITY = 15D;
 

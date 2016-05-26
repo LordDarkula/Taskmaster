@@ -22,6 +22,7 @@ public class Taskmaster extends AdvancedRobot
     private final static int RADAR = 0;
     private final static int GUN = 1;
     private final static int TANK = 2;
+    private boolean linear = true;
 
 
     public void run()
@@ -146,6 +147,11 @@ public class Taskmaster extends AdvancedRobot
                 linearPredict();
             }
 
+        }
+
+        public void OnBulletMissed(BulletMissedEvent evnt)
+        {
+            linear = !linear;
         }
 
         private void ramPredict()
