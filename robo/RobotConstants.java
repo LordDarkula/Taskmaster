@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class RobotConstants {
 
-    public final int RAM_DISTANCE = 40;
+    public final int RAM_DISTANCE = 50;
 
     public final int ENEMY_REST_VELOCITY = 0;
 
