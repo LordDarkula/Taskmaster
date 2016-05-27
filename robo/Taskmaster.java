@@ -206,11 +206,11 @@ public class Taskmaster extends AdvancedRobot
 
 
             // if the gun is cool and we're pointed at the target, shoot!
-            //if (getGunHeat() == 0 && Math.abs(getGunTurnRemaining()) < robotConstants.MAX_TURN_REMAINING)
-            //{
+            if (getGunHeat() == 0 && Math.abs(getGunTurnRemaining()) < robotConstants.MAX_TURN_REMAINING)
+            {
                 setFire(firePower);
 
-            //}
+            }
         }
     }
 
