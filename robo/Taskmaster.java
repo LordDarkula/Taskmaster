@@ -208,12 +208,12 @@ public class Taskmaster extends AdvancedRobot
         {
             //if (enemy.getDistance() < robotConstants.RAM_DISTANCE)
             //{
-                setTurnRight(enemy.getBearing() + 90);
+                //setTurnRight(enemy.getBearing() + 90);
                 //setAhead(20);
             //}
             //else {
-                //setTurnRight(enemy.getBearing());
-                //setAhead(enemy.getDistance());
+                setTurnRight(enemy.getBearing());
+                setAhead(enemy.getDistance());
             //}
         }
     }
