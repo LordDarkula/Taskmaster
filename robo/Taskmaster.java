@@ -147,7 +147,7 @@ public class Taskmaster extends AdvancedRobot
 
         public void move()
         {
-            if (linear)
+            if (enemy.getDistance() > robotConstants.RAM_DISTANCE)
             {
                 parts[GUN] = new LinearPredict();
 
