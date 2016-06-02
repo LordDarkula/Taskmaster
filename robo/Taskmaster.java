@@ -89,12 +89,15 @@ public class Taskmaster extends AdvancedRobot
         return Math.toDegrees(Math.atan2(x2-x1, y2-y1));
     }
 
-
-    public double lawOfCos( double b, double c, double angle)
-    {
-        return Math.sqrt(Math.pow(b, 2) + Math.pow(c, 2) - 2*b*c*Math.cos(Math.toRadians(angle)));
-    }
-
+    /**
+     * Calculates the distance between two positions
+     *
+     * @param x1 the original x
+     * @param y1 the original y
+     * @param x2 the new x
+     * @param y2 the new y
+     * @return the distance between the two points
+     */
     public double pythagoreanDistance(double x1, double y1, double x2, double y2 )
     {
         return Math.sqrt( Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2));
