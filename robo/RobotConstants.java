@@ -1,15 +1,24 @@
 package robo;
 
-
-import java.util.Random;
-
+/**
+ * Robot Constants  are kept in a class to allow for easy changing
+ * and easy accessing.
+ * Constants are:
+ * RAM_DISTANCE - The distance to Ram
+ * MAX_TURN_REMAINING - The maximum amount of turn
+ * INITIAL_TIME - The time of the arc it moves.
+ * MAX_BULLET_VELOCITY - the maximum bullet velocity
+ * MIN_BULLET_VELOCITY  - the minimum bullet velocity
+ *
+ * @author Aubhro Sengupta, Aditya Kuppili
+ * @author Period - 2
+ * @author Assignment - EnemyBot
+ * @author Sources - none
+ * @version 5/10/16
+ */
 public class RobotConstants {
 
     public final int RAM_DISTANCE = 50;
-
-    public final int ENEMY_REST_VELOCITY = 0;
-
-    public final int MAX_FIREPOWER = 3;
 
     public final int MAX_TURN_REMAINING = 10;
 
@@ -20,12 +29,6 @@ public class RobotConstants {
     public final double MIN_BULLET_VELOCITY = 11D;
 
     public RobotConstants() {
-
     }
 
-    public int getRandomAngle()
-    {
-        Random rand = new Random();
-        return rand.nextInt(20) + 20;
-    }
 }
