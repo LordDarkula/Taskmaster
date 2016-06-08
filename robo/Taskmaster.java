@@ -14,27 +14,25 @@ import java.awt.Color;
  *
  * @author Sources - none
  */
-public class Taskmaster extends AdvancedRobot
-{
-    private AdvancedEnemyBot enemy = new AdvancedEnemyBot();
+public class Taskmaster extends AdvancedRobot {
+    public AdvancedEnemyBot enemy = new AdvancedEnemyBot();
     private RobotPart[] parts = new RobotPart[3]; // make three parts
+    private RobotFunctions robotFunctions = new RobotFunctions();
     private RobotConstants robotConstants = new RobotConstants();
     private final static int RADAR = 0;
     private final static int GUN = 1;
     private final static int TANK = 2;
 
 
-    public void run()
-    {
-        parts[RADAR] = new Radar();
+    public void run() {
+        parts[RADAR] = new Radar(this);
         parts[GUN] = new Gun();
         parts[TANK] = new Tank();
 
         // initialize each part
-        for ( int i = 0; i < parts.length; i++ )
-        {
+        for (RobotPart part : parts) {
             // behold, the magic of polymorphism
-            parts[i].init();
+            part.init();
         }
 
         // iterate through each part, moving them as we go
@@ -48,96 +46,59 @@ public class Taskmaster extends AdvancedRobot
         }
     }
 
-    public void onScannedRobot( ScannedRobotEvent e )
-    {
+    public void onScannedRobot( ScannedRobotEvent e ) {
         Radar radar = (Radar)parts[RADAR];
         if ( radar.shouldTrack( e ) )
         enemy.update( e, this );
         // Do not add any more code here
     }
 
-    public void onRobotDeath( RobotDeathEvent e )
-    {
+    public void onRobotDeath( RobotDeathEvent e ) {
         Radar radar = (Radar)parts[RADAR];
         if ( radar.wasTracking( e ) )
             enemy.reset();
     }
 
-    // ... put normalizeBearing and absoluteBearing methods here
-    // normalizes a bearing to between +180 and -180
-    private double normalizeBearing(double angle)
-    {
-        while (angle >  180)
-            angle -= 360;
-        while (angle < -180)
-            angle += 360;
-        return angle;
-    }
-
-    // computes the absolute bearing between two points
-    private double absoluteBearing(double x1, double y1, double x2, double y2)
-    {
-        return Math.toDegrees(Math.atan2(x2-x1, y2-y1));
-    }
-
-
-    public double lawOfCos( double b, double c, double angle)
-    {
-        return Math.sqrt(Math.pow(b, 2) + Math.pow(c, 2) - 2*b*c*Math.cos(Math.toRadians(angle)));
-    }
-
-    public double pythagoreanDistance(double x1, double y1, double x2, double y2 )
-    {
-        return Math.sqrt( Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2));
-    }
-
     // ... declare the RobotPart interface and classes that implement it here
     // They will be _inner_ classes.
-    public interface RobotPart
-    {
-        public void init();
+    interface RobotPart {
+        void init();
 
-        public void move();
+        void move();
     }
 
-    private class Radar implements RobotPart
-    {
-        public void init()
-        {
-            setAdjustRadarForGunTurn(true);
+//    private class Radar implements RobotPart {
+//        public void init() {
+//            setAdjustRadarForGunTurn(true);
+//
+//        }
+//
+//        public void move() {
+//
+//            setTurnRadarRight(360 * enemy.getScanDirection());
+//
+//        }
+//
+//        boolean shouldTrack( ScannedRobotEvent e ) {
+//            // track if we have no enemy, the one we found is significantly
+//            // closer, or we scanned the one we've been tracking.
+//            return ( enemy.none() || e.getDistance() < enemy.getDistance() - 70 || e.getName()
+//                    .equals( enemy.getName() ) );
+//        }
+//
+//        boolean wasTracking( RobotDeathEvent e )
+//        {
+//            return e.getName().equals( enemy.getName() );
+//        }
+//    }
 
-        }
-
-        public void move()
-        {
-
-            setTurnRadarRight(360 * enemy.getScanDirection());
-
-        }
-
-        public boolean shouldTrack( ScannedRobotEvent e )
-        {
-            // track if we have no enemy, the one we found is significantly
-            // closer, or we scanned the one we've been tracking.
-            return ( enemy.none() || e.getDistance() < enemy.getDistance() - 70 || e.getName()
-                    .equals( enemy.getName() ) );
-        }
-
-        public boolean wasTracking( RobotDeathEvent e )
-        {
-            return e.getName().equals( enemy.getName() );
-        }
-    }
-
-    private class Gun implements RobotPart
-    {
+    private class Gun implements RobotPart {
         public void init()
         {
             setAdjustGunForRobotTurn(true);
         }
 
-        public void move()
-        {
+        public void move() {
             // Sets time at which the bullet will hit the enemy
             long time = robotConstants.INITIAL_TIME;
 
@@ -147,17 +108,17 @@ public class Taskmaster extends AdvancedRobot
 
 
             //  calculate gun turn toward enemy
-            double absDeg = absoluteBearing(getX(), getY(), futureX, futureY);
+            double absDeg = robotFunctions.absoluteBearing(getX(), getY(), futureX, futureY);
 
 
             // Finds distance to that point
-            double futureDistance = pythagoreanDistance(getX(), getY(), futureX, futureY);
+            double futureDistance = robotFunctions.pythagoreanDistance(getX(), getY(), futureX, futureY);
 
             // normalize the turn to take the shortest path there
-            setTurnGunRight(normalizeBearing(absDeg - getGunHeading()));
+            setTurnGunRight(robotFunctions.normalizeBearing(absDeg - getGunHeading()));
 
             // Calculate enemy distance left after gun has turned
-            double enemyDistanceLeft = pythagoreanDistance(enemy.getX(), enemy.getY(), futureX, futureY);
+            double enemyDistanceLeft = robotFunctions.pythagoreanDistance(enemy.getX(), enemy.getY(), futureX, futureY);
             double bulletSpeed;
 
             // If the enemy is not at rest
@@ -198,15 +159,13 @@ public class Taskmaster extends AdvancedRobot
         }
     }
 
-    private class Tank implements RobotPart
-    {
+    private class Tank implements RobotPart {
         public void init()
         {
             setColors(Color.WHITE, Color.WHITE, Color.BLACK);
         }
 
-        public void move()
-        {
+        public void move() {
             //if (enemy.getDistance() < robotConstants.RAM_DISTANCE)
             //{
                 //setTurnRight(enemy.getBearing() + 90);

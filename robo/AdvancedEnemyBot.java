@@ -60,8 +60,8 @@ public class AdvancedEnemyBot extends EnemyBot
         return y + Math.cos(Math.toRadians(getHeading())) * getVelocity() * when;
     }
 
-    public double getFutureBwearing( long when, double currentX, double currentY ) {
-        return Math.toDegrees(Math.atan(getFutureX(when) - currentX) / (getFutureY(when) - currentY));
+    public double getFutureBwearing( long when, double futureRobotX, double futureRobotY ) {
+        return Math.toDegrees(Math.atan(getFutureX(when) - futureRobotX) / (getFutureY(when) - futureRobotY));
     }
 
     byte getScanDirection()
