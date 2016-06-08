@@ -42,8 +42,9 @@ public class Taskmaster extends AdvancedRobot
         {
             // polymorphism galore!
             parts[i].move();
-            if ( i == 0 )
+            if ( i == 0 ) {
                 execute();
+            }
         }
     }
 

@@ -50,17 +50,21 @@ public class AdvancedEnemyBot extends EnemyBot
         scanDirection *= -1; // changes value from 1 to -1
     }
 
-    public double getFutureX( long when )
+    double getFutureX(long when)
     {
         return x + Math.sin(Math.toRadians(getHeading())) * getVelocity() * when;
     }
 
-    public double getFutureY( long when )
+    double getFutureY( long when )
     {
         return y + Math.cos(Math.toRadians(getHeading())) * getVelocity() * when;
     }
 
-    public byte getScanDirection()
+    public double getFutureBwearing( long when, double currentX, double currentY ) {
+        return Math.toDegrees(Math.atan(getFutureX(when) - currentX) / (getFutureY(when) - currentY));
+    }
+
+    byte getScanDirection()
     {
         return scanDirection;
     }
