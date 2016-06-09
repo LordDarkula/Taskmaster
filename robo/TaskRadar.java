@@ -3,11 +3,11 @@ package robo;
 import robocode.RobotDeathEvent;
 import robocode.ScannedRobotEvent;
 
-public class Radar implements Taskmaster.RobotPart {
+public class TaskRadar {
 
     public Taskmaster taskmaster;
 
-    public Radar(Taskmaster taskmaster) {
+    public TaskRadar(Taskmaster taskmaster) {
         this.taskmaster = taskmaster;
     }
     public void init() {
