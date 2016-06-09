@@ -2,8 +2,10 @@ package robo;
 
 public class RobotFunctions {
 
-    public RobotFunctions() {
+    Taskmaster taskmaster;
 
+    public RobotFunctions(Taskmaster taskmaster) {
+        this.taskmaster = taskmaster;
     }
 
     private double futeureX;

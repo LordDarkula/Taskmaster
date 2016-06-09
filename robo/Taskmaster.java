@@ -1,7 +1,6 @@
 package robo;
 
 import robocode.*;
-import java.awt.Color;
 
 /**
  * A modular bot adhering to the RoboPart Interface.
@@ -17,7 +16,7 @@ import java.awt.Color;
 public class Taskmaster extends AdvancedRobot {
     public AdvancedEnemyBot enemy = new AdvancedEnemyBot();
     private RobotPart[] parts = new RobotPart[3]; // make three parts
-    RobotFunctions robotFunctions = new RobotFunctions();
+    RobotFunctions robotFunctions = new RobotFunctions(this);
     RobotConstants robotConstants = new RobotConstants();
     private final static int RADAR = 0;
     private final static int GUN = 1;

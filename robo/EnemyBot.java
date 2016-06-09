@@ -2,7 +2,6 @@ package robo;
 
 import robocode.*;
 
-
 /**
  * Record the state of an enemy bot.
  *
